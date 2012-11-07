@@ -60,7 +60,8 @@ let cherche_xi base nbr n =
       (match factor_base base yi with
 	  None -> cherche nb_a_trouver (if b then i else (i+1)) (not b)
 	| Some d -> 
-	  (Printf.printf "xi = %d\n " xi;
+	  (Printf.printf "xi = %d\n" xi;
+	   flush stdout;
 	  (xi, d) :: cherche (nb_a_trouver -1)  (if b then i else (i+1)) (not b)
       ))
   in
@@ -167,6 +168,7 @@ let factor n =
   let b = base n in
   let nb = Array.length b in
   Printf.printf "Nombre de relation de congruences à trouver : %d\n" (nb+1);
+  flush stdout;
   let xis = cherche_xi b (nb+1) n in
 
   let m = get_m xis in
@@ -182,4 +184,4 @@ let factor n =
 ;;
   
 
-let _ = factor 37399;;
+let _ = Printf.printf "facteur : %d" (factor 19177);;
